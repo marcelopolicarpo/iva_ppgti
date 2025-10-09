@@ -16,6 +16,19 @@ def angle_between_points(a, b, c):
     ang = np.degrees(np.arccos(np.clip(cosang, -1.0, 1.0)))
     return ang
 
+def angulo_ombro(ombro, quadril, cotovelo):
+    """
+    Calcula o ângulo do braço em relação ao corpo (ângulo entre ombro-quadril e ombro-cotovelo).
+    Retorna o ângulo em graus.
+    """
+    vetor_ombro_quadril = np.array(quadril) - np.array(ombro)
+    vetor_ombro_cotovelo = np.array(cotovelo) - np.array(ombro)
+    cosang = np.dot(vetor_ombro_quadril, vetor_ombro_cotovelo) / (
+        np.linalg.norm(vetor_ombro_quadril) * np.linalg.norm(vetor_ombro_cotovelo) + 1e-8
+    )
+    ang = np.degrees(np.arccos(np.clip(cosang, -1.0, 1.0)))
+    return ang
+
 cap = cv2.VideoCapture(0)
 # buffer para suavizar ângulo
 angle_buffer = deque(maxlen=5)
@@ -42,6 +55,10 @@ while True:
         shoulder = (lm[12].x * w, lm[12].y * h)
         elbow = (lm[14].x * w, lm[14].y * h)
         wrist   = (lm[16].x * w, lm[16].y * h)
+        quadril = (lm[24].x * w, lm[24].y * h)  # RIGHT_HIP = 24
+        ang_ombro = angulo_ombro(shoulder, quadril, elbow)
+        cv2.putText(frame, f"Ombro: {ang_ombro:.1f} deg", (int(shoulder[0]+10), int(shoulder[1]-30)),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
 
         ang = angle_between_points(shoulder, elbow, wrist)
         angle_buffer.append(ang)
