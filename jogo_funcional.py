@@ -448,11 +448,11 @@ while cap.isOpened():
     cv2.putText(frame, f"Tempo. Mov. Esq: {moving_times['left']:.1f}s", (10, 240), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 100, 100), 1)
 
     # Abertura do braço
-    cv2.putText(frame, f"Abert. Esq: {arm_openings['right']:.1f}°", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 3)
-    cv2.putText(frame, f"Abert. Esq: {arm_openings['right']:.1f}°", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 100, 255), 1)
+    cv2.putText(frame, f"Abert. Esq: {arm_openings['right']:.1f}", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 3)
+    cv2.putText(frame, f"Abert. Esq: {arm_openings['right']:.1f}", (10, 270), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 100, 255), 1)
     
-    cv2.putText(frame, f"Abert. Dir: {arm_openings['left']:.1f}°", (10, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 3)
-    cv2.putText(frame, f"Abert. Dir: {arm_openings['left']:.1f}°", (10, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 100, 100), 1)
+    cv2.putText(frame, f"Abert. Dir: {arm_openings['left']:.1f}", (10, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 3)
+    cv2.putText(frame, f"Abert. Dir: {arm_openings['left']:.1f}", (10, 300), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 100, 100), 1)
 
     # Adiciona a mensagem para sair
     cv2.putText(frame, "Pressione Q para sair", (frame_w - 400, frame_h - 20),
